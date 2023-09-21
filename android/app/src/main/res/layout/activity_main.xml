@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".MainActivity">
+
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:layout_margin="10dp"
+        android:text="Sign in"/>
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="200dp"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content"
+        android:text="Joe"
+        android:hint="Recipient"/>
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="200dp"
+        android:layout_margin="10dp"
+        android:text="pass123"
+        android:layout_height="wrap_content"
+        android:hint="Password"/>
+
+
+
+<!--    <Button-->
+<!--        android:id="@+id/buttonStartHandshake"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Login with handshake (First login)" />-->
+
+    <Button
+        android:id="@+id/buttonLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="300px"/>
+    <TextView
+        android:id="@+id/textViewHandshake"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="Hanshake not initialised yet" />
+    <Button
+        android:id="@+id/buttonResetDeviceBinding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset device binding" />
+
+
+
+
+</LinearLayout>
