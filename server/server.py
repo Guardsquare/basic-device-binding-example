@@ -1,10 +1,8 @@
 from flask import Flask, request, jsonify
 import string
 import random
-import ecdsa
 import json
 import base64
-from werkzeug.http import HTTP_STATUS_CODES
 from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.exceptions import InvalidSignature
@@ -63,7 +61,6 @@ def get_user_for_session(request):
 def extract_original_payload(request_body):
     signed_payload = json.loads(request.json["signedPayload"])
     return signed_payload
-    original_payload = originalPayload
 
 @app.route('/loginWithHandshake', methods=['POST'])
 def login_with_handshake():
