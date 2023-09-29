@@ -60,7 +60,7 @@ In this sample project, we combined `/login` with the handshake and pass public 
 
 The handshake occurs only once. The next time you want to sign in, you don't need to pass public key in the request. You can just sign the whole message in the same way as we do below in the Communication phase.
 
-(Optionally) In a more advanced approach, you should have a shared secred between youd device and the server and use it to HMAC the {username, password, pubkey}.
+(Optionally) In a more advanced approach, you should have a shared secret between youd device and the server and use it to HMAC the {username, password, pubkey}.
 
 
 
@@ -109,7 +109,9 @@ Body:
 
 
 
-Once this signed request arrives at the server side, the server will verify the integrity of the `signedPayload` with the `signature` and the `public key `  it received at the handshake phase.
+Once this signed request arrives at the server side, the server will check the integrity of the `signedPayload` by veryfing the `signature` with the `public key ` from the handshake phase. 
+
+To ensure the integrity of the Authorization/Session token, we can move it completely from the HTTPS headers to the `signedPayload`.
 
 
 
@@ -129,9 +131,15 @@ I replaced the `session token` with another valid token of another user. The ser
 
 #### Tampering recipient with MITM
 
-In this attacke scenario, I modified `amount` and `recipient` but the server couldn't verify the signature, so it responded with HTTP `403` error and an appriopriate message.
+In this attack scenario, I modified `amount` and `recipient` but the server couldn't verify the signature, so it responded with HTTP `403` error and an appriopriate message.
 
 ![evil_bob](./images/evil_bob.png)
+
+### Limitations
+
+This basic implementation of device binding doesn’t protect against replay attacks. To mitigate the issue, integrate a nonce challenge.
+
+
 
 ## Usage
 
@@ -140,7 +148,7 @@ In this attacke scenario, I modified `amount` and `recipient` but the server cou
 The server for this example is implemented in python
 
 1. Install dependencies `pip3 install -r requirements.txt`
-2. Run python server with `python3 ./sercer.py`
+2. Run python server with `python3 ./server.py`
 
 
 
@@ -148,6 +156,16 @@ The server for this example is implemented in python
 
 Import the `android` directory into the Android Studio project and build the project.
 
-
-
 For compatibility reasons `setIsStrongBoxBacked(true)` is commented out but you should keep it enabled for all compatible devices.
+
+Currently, the `BASE_URL` of the server is set to `http://192.168.50.10:8282`. Once you run the server, update this value with the new IP address. You can find `BASE_URL` in `RaspApiClient.kt`. 
+
+The project uses `network_security_config.xml` , so make sure to update this config to allow clear-text traffic to your new IP address. Below, you can find a relevant line of code you need to update.
+
+```
+<domain includeSubdomains="true">192.168.50.10</domain>
+```
+
+
+
+Happy coding

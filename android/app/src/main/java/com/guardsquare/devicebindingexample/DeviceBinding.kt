@@ -3,16 +3,11 @@ package com.guardsquare.devicebindingexample
 import android.content.Context
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
-import android.security.keystore.KeyProperties.PURPOSE_DECRYPT
-import android.security.keystore.KeyProperties.PURPOSE_ENCRYPT
 import android.security.keystore.KeyProperties.PURPOSE_SIGN
 import android.security.keystore.KeyProperties.PURPOSE_VERIFY
-import android.widget.Toast
 import java.io.ByteArrayInputStream
-import java.io.IOException
 import java.io.InputStream
 import java.security.InvalidAlgorithmParameterException
-import java.security.InvalidKeyException
 import java.security.KeyPair
 import java.security.KeyPairGenerator
 import java.security.KeyStore
@@ -21,7 +16,6 @@ import java.security.NoSuchProviderException
 import java.security.PrivateKey
 import java.security.PublicKey
 import java.security.Signature
-import java.security.SignatureException
 
 
 class DeviceBinding() {
@@ -53,7 +47,7 @@ class DeviceBinding() {
         val kpg: KeyPairGenerator = KeyPairGenerator.getInstance("EC", "AndroidKeyStore")
         val builder = KeyGenParameterSpec.Builder(
             alias,
-            PURPOSE_SIGN or PURPOSE_VERIFY or PURPOSE_DECRYPT or PURPOSE_ENCRYPT
+            PURPOSE_SIGN or PURPOSE_VERIFY
         )
 
         builder.setSignaturePaddings(KeyProperties.SIGNATURE_PADDING_RSA_PKCS1)
