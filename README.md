@@ -4,6 +4,7 @@
 
 This project describes the integration of a basic Device Binding into your app. Firstly, let's describe a typical REST workflow without Device Binding, so that we can clearly see the differences between approaches.
 
+You can read more about Device Binding in our blog post [Enhanced App Authentication Scheme with Mobile Device Binding](https://www.guardsquare.com/blog/mobile-device-binding). 
 
 
 ### Typical workflow of REST API (without Device Binding)
